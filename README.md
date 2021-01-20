@@ -1,5 +1,10 @@
 # intra process ping latency test
 
+This package records intra process communication latency and publishes its topic statistics.
+
+## rqt_graph
+![node_graph](./imgs/rosgraph.png)
+
 ## Setup
 ```
 $ mkdir -p ~/ros2_ws/src
