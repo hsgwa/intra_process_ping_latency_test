@@ -1,4 +1,4 @@
-# intra process ping patency test
+# intra process ping latency test
 
 ## Setup
 ```
