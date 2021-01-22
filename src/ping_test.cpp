@@ -30,11 +30,11 @@ int main(int argc, char * argv[])
 
   auto option = rclcpp::SubscriptionOptions();
   option.topic_stats_options.state = rclcpp::TopicStatisticsState::Enable;
-  option.topic_stats_options.publish_period = 5s;
+  option.topic_stats_options.publish_period = 1s;
   option.topic_stats_options.publish_topic = "/topic_statistics";
 
   auto sub = node->create_subscription<sensor_msgs::msg::Imu>(
-    "topic", 10,
+    "topic", 1,
     [](sensor_msgs::msg::Imu::UniquePtr msg) {
       (void) msg;
     },
