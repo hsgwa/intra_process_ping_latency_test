@@ -9,7 +9,7 @@ This package records intra process communication latency and publishes its topic
 ```
 $ mkdir -p ~/ros2_ws/src
 $ cd ~/ros2_ws
-$ git clone https://github.com/hsgwa/intra_process_ping_latency_test.git src
+$ git clone https://github.com/hsgwa/intra_process_ping_latency_test.git src/intra_process_ping_latency_test
 $ colcon build --packages-select intra_process_ping_latency_test
 ```
 
