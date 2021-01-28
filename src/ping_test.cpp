@@ -30,7 +30,7 @@ int main(int argc, char * argv[])
 
   auto option = rclcpp::SubscriptionOptions();
   option.topic_stats_options.state = rclcpp::TopicStatisticsState::Enable;
-  option.topic_stats_options.publish_period = 5s;
+  option.topic_stats_options.publish_period = 1s;
   option.topic_stats_options.publish_topic = "/topic_statistics";
 
   auto sub = node->create_subscription<sensor_msgs::msg::Imu>(
@@ -43,10 +43,18 @@ int main(int argc, char * argv[])
   auto pub = node->create_publisher<sensor_msgs::msg::Imu>("topic", 10);
 
   auto timer = node->create_wall_timer(
-    10ms,
+    100ms,
     [&pub, &node]() {
+      static int i = 0;
       auto msg = std::make_unique<sensor_msgs::msg::Imu>();
-      msg->header.stamp = node->now();
+      if (i++ < 100) {
+        msg->header.stamp = node->now() - 1s;
+        // Imitation of transition states
+        RCLCPP_INFO(node->get_logger(), "Publishing: transition state message. ");
+      } else {
+        msg->header.stamp = node->now();
+        RCLCPP_INFO(node->get_logger(), "Publishing: steady state message");
+      }
       pub->publish(std::move(msg));
     });
 
